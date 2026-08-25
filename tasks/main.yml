@@ -30,47 +30,6 @@
 
   # autostart
   - ansible.builtin.import_tasks: autostart.yml
-  
+
   # config
-  - when: nextcloud_client_config != None
-    block:
-
-    # check vars
-    - name: Check vars for nextcloud-client role
-      ansible.builtin.assert:
-        that:
-        - nextcloud_client_config_server_user != None
-        - nextcloud_client_config_server_url != None
-        - nextcloud_client_config_local_dir != None
-
-    # mkdir 
-    - name: Mkdir {{ nextcloud_client_config_dst | dirname }}
-      become: true
-      ansible.builtin.file:
-        state: directory
-        mode: u=rwx,g=,o=
-        path: "{{ nextcloud_client_config_dst | dirname }}"
-        owner: "{{ nextcloud_client_user }}"
-        group: "{{ nextcloud_client_user }}"
-
-    # cp config
-    - name: Copy config {{ nextcloud_client_config }}
-      become: true
-      ansible.builtin.template:
-        src: "{{ nextcloud_client_config }}"
-        dest: "{{ nextcloud_client_config_dst }}"
-        force: "{{ nextcloud_client_config_force }}"
-        owner: "{{ nextcloud_client_user }}"
-        group: "{{ nextcloud_client_user }}"
-        mode: u=rw,g=,o=
-
-    # mkdir local dir
-    - when: nextcloud_client_config_local_dir != None
-      name: Mkdir {{ nextcloud_client_config_local_dir }}
-      become: true
-      ansible.builtin.file:
-        state: directory
-        mode: u=rwx,g=,o=
-        path: "{{ nextcloud_client_config_local_dir }}"
-        owner: "{{ nextcloud_client_user }}"
-        group: "{{ nextcloud_client_user }}"
+  - ansible.builtin.import_tasks: config.yml
