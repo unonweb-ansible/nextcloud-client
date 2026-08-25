@@ -1,7 +1,7 @@
 ---
 - tags: [nextcloud-client-autostart]
   block:
-  
+
   # cp autostart desktop file
   - when: nextcloud_client_autostart == true
     block:
@@ -16,6 +16,7 @@
         owner: "{{ nextcloud_client_user }}"
         group: "{{ nextcloud_client_user }}"
 
+    # copy
     - name: Copy autostart {{ nextcloud_client_autostart_src }} > {{ nextcloud_client_autostart_dst }}
       become: true
       notify: update-desktop-database
