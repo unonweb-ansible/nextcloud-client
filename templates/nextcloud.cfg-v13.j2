@@ -1,13 +1,18 @@
 [General]
 confirmExternalStorage=false
-isVfsEnabled=false
-launchOnSystemStartup={{ nextcloud_client_autostart }}
-showMainDialogAsNormalWindow=true
+desktopEnterpriseChannel=daily
+launchOnSystemStartup=false
+monoIcons=true
+moveToTrash=false
 newBigFolderSizeLimit=500
 useNewBigFolderSizeLimit=false
+isVfsEnabled=false
 optionalServerNotifications=true
-showCallNotifications=true
-showChatNotifications=true
+showMainDialogAsNormalWindow=true
+showCallNotifications=false
+showChatNotifications=false
+showQuotaWarningNotifications=true
+stopSyncingExistingFoldersOverLimit=false
 promptDeleteAllFiles=true
 
 [Nextcloud]
@@ -24,6 +29,7 @@ notificationRefreshInterval=300000
 0\Folders\1\version=2
 0\Folders\1\virtualFilesMode=off
 0\authType=webflow
+0\desktopEnterpriseChannel=daily
 0\dav_user={{ nextcloud_client_config_server_user }}
 0\displayName={{ nextcloud_client_config_server_user }}
 0\networkDownloadLimit=0
