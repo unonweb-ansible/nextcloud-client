@@ -1,3 +1,4 @@
 ---
 __nextcloud_client_flatpak_id: com.nextcloud.desktopclient.nextcloud
 __nextcloud_client_flatpak_overrides_dir: /home/{{ nextcloud_client_user }}/.local/share/flatpak/overrides
+__nextcloud_client_flatpak_exports_dbus_services_dir: "/home/{{ nextcloud_client_user }}/.local/share/flatpak/exports/share/dbus-1/services"

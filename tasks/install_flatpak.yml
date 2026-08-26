@@ -105,3 +105,29 @@
       owner: root
       group: root
       mode: u=rw,g=,o=r # world readable
+
+# dbus integration
+- when: nextcloud_client_dbus_prevent_trigger == true
+  tags: nextcloud-client-dbus
+  block:
+
+  # mkdir dbus integration
+  - name: Mkdir {{ __nextcloud_client_flatpak_exports_dbus_services_dir }}
+    become: true
+    ansible.builtin.file:
+      state: directory
+      mode: u=rwx,g=,o=
+      path: "{{ __nextcloud_client_flatpak_exports_dbus_services_dir }}"
+      owner: "{{ nextcloud_client_user }}"
+      group: "{{ nextcloud_client_user }}"
+
+  # copy dbus prevention
+  - name: Copy dbus prevention config to {{ __nextcloud_client_flatpak_exports_dbus_services_dir }}/com.nextcloudgmbh.Nextcloud.service
+    become: true
+    ansible.builtin.copy:
+      src: "dbus/com.nextcloudgmbh.Nextcloud.service"
+      dest: "{{ __nextcloud_client_flatpak_exports_dbus_services_dir }}/com.nextcloudgmbh.Nextcloud.service"
+      owner: "{{ nextcloud_client_user }}"
+      group: "{{ nextcloud_client_user }}"
+      mode: u=rw,g=,o=r
+  
