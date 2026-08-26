@@ -1,7 +1,7 @@
 ---
 # ~/.local/share/icons/hicolor/${size}/apps
 
-# flatpak
+# flatpak install
 - when: nextcloud_client_flatpak_state != None
   name: Flatpak -> {{ nextcloud_client_flatpak_state }}
   become: true
@@ -10,6 +10,7 @@
     method: system
     state: "{{ nextcloud_client_flatpak_state }}"
 
+# flatpak overrides
 - when: nextcloud_client_flatpak_overrides != None
   block:
 
@@ -23,7 +24,7 @@
       group: "{{ nextcloud_client_user }}"
       path: "{{ __nextcloud_client_flatpak_overrides_dir }}"
 
-  # flatpak override
+  # template override
   - name: Template overrides {{ __nextcloud_client_flatpak_overrides_dir }}/{{ __nextcloud_client_flatpak_id }}
     become: true
     ansible.builtin.template:
